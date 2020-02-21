@@ -48,6 +48,10 @@ def root():
 
     return render_template('index.html', times=times)
 
+@app.route('/api/user')
+def api(req):
+    pass
+
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
