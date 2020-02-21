@@ -68,7 +68,7 @@ def root():
 
 @app.route('/api/user', methods=['POST'])
 def api_user():
-    if request.method == 'POST':
+    try:
         data = request.json()
         User = datastore.Entity(key=storage.key('user'))
         tmp = {}
@@ -77,8 +77,8 @@ def api_user():
         User.update(tmp.items())
         storage.put(User)
         return 'success'
-    else:
-        return False
+    except Exception as e:
+        return e
 
 def send_email_async(app, msg):
     with app.app_context():
