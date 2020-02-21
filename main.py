@@ -49,9 +49,19 @@ def root():
 
     return render_template('index.html', times=times)
 
-@app.route('/api/user')
-def api(req):
+@app.route('/api/user', methods=['POST'])
+def api_user(data):
     pass
+    # data = []
+    # error = None
+    # select = request.form.get('comp_select')
+    # resp = query_api(select)
+    # pp(resp)
+    # if resp:
+    #     data.append(resp)
+    # if len(data) != 2:
+    #     error = 'Bad Response from Weather API'
+    # return request.Response() ('result.html', data=data, error=error)
 
 
 if __name__ == '__main__':
