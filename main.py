@@ -19,19 +19,19 @@ from google.cloud import datastore
 
 
 app = Flask(__name__)
-datastore_client = datastore.Client()
+storage = datastore.Client()
 
 def store_time(dt):
-    entity = datastore.Entity(key=datastore_client.key('visit'))
+    entity = datastore.Entity(key=storage.key('visit'))
     entity.update({
         'timestamp': dt
     })
 
-    datastore_client.put(entity)
+    storage.put(entity)
 
 
 def fetch_times(limit):
-    query = datastore_client.query(kind='visit')
+    query = storage.query(kind='visit')
     query.order = ['-timestamp']
 
     times = query.fetch(limit=limit)

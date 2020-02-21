@@ -18,6 +18,7 @@ venv/
 main_test.py
 README.md
 LISCENSE
+gcreds.json
 
 # Python pycache:
 __pycache__/

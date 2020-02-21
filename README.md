@@ -39,6 +39,10 @@ python3.7 -m pip install -r requirements.txt
 
 ### Get our secret environment variables from Slack
 
-put them in a file called ```.env```
+put them in a file called ```gcreds.json```
+
+```bash
+export GOOGLE_APPLICATION_CREDENTIALS="$PWD/gcreds.json"
+```
 
 ### develop away
