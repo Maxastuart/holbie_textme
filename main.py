@@ -57,6 +57,7 @@ def fetch_times(limit):
     return times
 
 @app.route('/')
+@app.route('/index.html')
 def root():
     # Store the current access time in Datastore.
     store_time(datetime.datetime.now())
@@ -74,7 +75,7 @@ def api_user():
         for key, value in request.json().items():
             tmp[key] = value
         tmp['created_at'] = datetime.datetime.now()
-        User.update(tmp.items())
+        User.update(tmp)
         storage.put(User)
         return 'success'
     except Exception as e:
