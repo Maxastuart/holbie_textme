@@ -69,10 +69,9 @@ def root():
 @app.route('/api/user', methods=['POST'])
 def api_user():
     try:
-        data = request.json()
         User = datastore.Entity(key=storage.key('user'))
         tmp = {}
-        for key, value in data.items():
+        for key, value in request.json().items():
             tmp[key] = value
         tmp['created_at'] = datetime.datetime.now()
         User.update(tmp.items())
