@@ -12,13 +12,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 // [START gae_python37_log]
 'use strict';
 
-window.addEventListener('load', function () {
-
-  console.log("Hello World!");
-
+$(document).ready(function () {
+  console.log('hehe');
+  $('#submit').click(() => {
+    const data = {
+      'studentId': $('#studentId').val(),
+      'password': $('#password').val(),
+      'apiKey': $('#apiKey').val(),
+      'cohort': $('#cohort').val(),
+      'sendText': $('#sendText').is(':checked'),
+      'phone': $('#phone').val(),
+      'nApi': $('#nApi').val(),
+      'nSecret': $('#nSecret').val(),
+      'sendEmail': $('#sendEmail').is(':checked')
+    };
+    fetch('http://127.0.0.1:8080/api/user', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  });
 });
+// window.addEventListener('load', function () {
+//   const submitButton = document.getElementById('submit');
+//   submitButton.on
+
+//   console.log("Hello World!");
+
+// });
 // [END gae_python37_log]
