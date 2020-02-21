@@ -105,7 +105,7 @@ celerybeat.pid
 .env
 .venv
 env/
-# venv/   unignored because we'll pass this around
+venv/
 ENV/
 env.bak/
 venv.bak/
