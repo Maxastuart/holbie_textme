@@ -22,21 +22,16 @@ sudo apt update
 sudo apt install python3.7
 ```
 
-### use venv, a virtual environment to get the right dependencies for our project
+### use venv, a virtual environment to install dependencies
 
 This, and the rest, should be done in the folder you cloned this repo into ( /foo/bar/holbie_textme )
 
 ```bash
 pip3 install --upgrade pip
 pip3 install virtenv
-python3.7 -m pip venv venv   # creates a venv folder in your current directory
-source venv/bin/activate        # activates this virtual environment
-```
-
-### install dependencies
-
-```bash
-python3.7 -m pip install -r requirements.txt
+pip3 venv venv       # creates a venv folder in your current directory
+source venv/bin/activate      # activates this virtual environment
+pip3 install -r requirements.txt
 ```
 
 ### Get our secret environment variables from Slack

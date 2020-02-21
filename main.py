@@ -15,6 +15,7 @@
 # [START gae_python37_render_template]
 import datetime
 from flask import Flask, render_template
+from flask_cors import CORS
 from google.cloud import datastore
 
 
