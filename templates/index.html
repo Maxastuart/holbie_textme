@@ -10,19 +10,19 @@
  <form class="box" action="index.html" method="post">
 
       <h1><font face="bradley hand" color="red">Holbie, text me!</font></h1>
-      <input type="text" name="" placeholder="Holberton Id">
-      <input type="Password" name="" placeholder="Password">
-      <input type="text" name="" placeholder="API key">
-      <input type="text" name="" placeholder="Cohort">
-      <input type="text" name="" placeholder="Location">
+      <input type="text" name="" placeholder="Holberton Id ex:802" pattern="[0-9]{3}" required>
+      <input type="Password" name="" placeholder="Password" required>
+      <input type="text" name="" placeholder="API key ex: 8d2fd1...feb362" required>
+      <input type="text" name="" placeholder="Cohort ex: SF-0619" required>
+      <!--input type="text" name="" placeholder="Location  ex:SF"--> 
       <div class="message-div">
         <div class="row">
           <div class="column">
             <input type="checkbox" id="text_msg" >
             <label for="text_msg"> Text Message</label>
-            <input type="text"  name="phone" class="myPhone" placeholder="Phone Number">
-            <input type="text"  name="nApi" class="myPhone" placeholder="Nexmo API">
-            <input type="text"  name="nSecret" class="myPhone" placeholder="Nexmo Secret">
+            <input type="text"  name="phone" class="myPhone" placeholder="Phone Number: 415-555-5555" >
+            <input type="text"  name="nApi" class="myNapi" placeholder="Nexmo API" >
+            <input type="text"  name="nSecret" class="mySecret" placeholder="Nexmo Secret" >
           </div>
 
           <div class="column">
