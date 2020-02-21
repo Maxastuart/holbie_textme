@@ -67,7 +67,7 @@ def root():
     return render_template('index.html', times=times)
 
 @app.route('/api/user', methods=['POST'])
-def api_user(data):
+def api_user():
     if request.method == 'POST':
         data = request.json()
         User = datastore.Entity(key=storage.key('user'))
