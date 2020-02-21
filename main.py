@@ -73,7 +73,8 @@ def api_user():
         User = datastore.Entity(key=storage.key('user'))
         tmp = {}
         for key, value in data.items():
-            setattr(tmp, key, value)
+            tmp[key] = value
+        tmp['created_at'] = datetime.datetime.now()
         User.update(tmp.items())
         storage.put(User)
         return 'success'
