@@ -68,18 +68,14 @@ def root():
 
 @app.route('/api/user', methods=['POST'])
 def api_user(data):
-    pass
-    # data = []
-    # error = None
-    # select = request.form.get('comp_select')
-    # resp = query_api(select)
-    # pp(resp)
-    # if resp:
-    #     data.append(resp)
-    # if len(data) != 2:
-    #     error = 'Bad Response from Weather API'
-    # return request.Response() ('result.html', data=data, error=error)
-
+    if request.method == 'POST':
+        data = request.json()
+        User = datastore.Entity(key=storage.key('user'))
+        tmp = {}
+        for key, value in data.items():
+            setattr(tmp, key, value)
+        User.update(tmp.items())
+        storage.put(User)
 
 def send_email_async(app, msg):
     with app.app_context():
