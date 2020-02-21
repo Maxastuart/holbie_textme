@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!./venv/bin/python3
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +14,64 @@
 # limitations under the License.
 
 # [START gae_python37_render_template]
+
+# FLASK_APP=main.py MAIL_USERNAME=holbietextme@gmail.com MAIL_PASSWORD=ryuichiiscool python main.py
 import datetime
 
-from flask import Flask, render_template
+from flask import flash, Flask, redirect, render_template, request, url_for
+
+from flask_mail import Mail, Message
+
+from os import getenv
+from threading import Thread
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+# app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'hard to guess string'  # might not need
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
+app.config['MAIL_SENDER'] = getenv('MAIL_USERNAME')
+app.config['SSL_REDIRECT'] = False
 
-@app.route('/')
-def root():
-    # For the sake of example, use static information to inflate the template.
-    # This will be replaced with real information in later steps.
-    dummy_times = [datetime.datetime(2018, 1, 1, 10, 0, 0),
-                   datetime.datetime(2018, 1, 2, 10, 30, 0),
-                   datetime.datetime(2018, 1, 3, 11, 0, 0),
-                   ]
+mail = Mail(app)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        if False:
+            flash("This is a flashed message.")
+        return redirect(url_for('index'))
+    else:
+        # For the sake of example, use static information to inflate the template.
+        # This will be replaced with real information in later steps.
+        dummy_times = [datetime.datetime(2018, 1, 1, 10, 0, 0),
+                       datetime.datetime(2018, 1, 2, 10, 30, 0),
+                       datetime.datetime(2018, 1, 3, 11, 0, 0),
+                       ]
 
     return render_template('index.html', times=dummy_times)
+
+
+def send_email_async(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+
+def send_email(to, subject):  # , template, **kwargs):
+    msg = Message(subject, sender=app.config['MAIL_SENDER'], recipients=[to])
+    # render_template(template + '.txt', **kwargs)
+    msg.body = 'this is the body'
+    # render_template(template + '.html', **kwargs)
+    msg.html = '<h1>header html</h1>'
+    thr = Thread(target=send_email_async, args=[app, msg])
+    thr.start()
+    return thr
 
 
 if __name__ == '__main__':
