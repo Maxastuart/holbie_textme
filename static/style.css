@@ -2,7 +2,8 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #ffcccc;
+    background-image: url("../static/images/background.jpg");
+    background-size: cover;
 }
 .box{
     width: 40%;
@@ -33,7 +34,7 @@ body{
     padding: 14px 10px;
     width: 200px;
     outline: none;
-    color: white;
+    color: black;
     border-radius: 24px;
     transition: 0.25s;
 }
@@ -46,13 +47,14 @@ body{
     display:none;
 }
 
+
 .box input[type = "submit"]{
     border:0;
     background: none;
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #3498db;
+    border: 2px solid red;
     padding: 14px 40px;
     outline: none;
     color: gray;
