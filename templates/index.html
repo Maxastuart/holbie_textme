@@ -1,18 +1,36 @@
-<!doctype html>
-<html>
-<head>
-  <title>Datastore and Firebase Auth Example</title>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <title>HBnB</title>
+  </head>
+  <body>
 
-  <h1>Datastore and Firebase Auth Example</h1>
+ <form class="box" action="index.html" method="post">
 
-  <h2>Last 10 visits</h2>
-  {% for time in times %}
-    <p>{{ time }}</p>
-  {% endfor %}
+      <h1>HOLBIE TEXT</h1>
+      <input type="text" name="" placeholder="Holberton Id">
+      <input type="Password" name="" placeholder="Password">
+      <input type="text" name="" placeholder="API key">
+      <input type="text" name="" placeholder="Cohort">
+      <input type="text" name="" placeholder="Location">
+      <div class="message-div">
+        <div class="row">
+          <div class="column">
+            <input type="checkbox" id="text_msg" >
+            <label for="text_msg"> Text Message</label>
+            <input type="text"  name="phone" class="myPhone">
+          </div>
 
-</body>
+          <div class="column">
+            <input type="checkbox" id="e_mail" name="">
+            <label for="e_mail"> Email</label>
+            <label class="myDescription">Email Description</label>
+          </div>
+        </div>
+      </div>
+      <input type="submit" name="" value= "SUBMIT">
+</form>
+  </body>
 </html>
