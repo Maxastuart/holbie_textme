@@ -69,11 +69,11 @@ def root():
 @app.route('/api/user', methods=['POST'])
 def api_user():
     if request.method == 'POST':
-        data = request.json()
+        data = request.get_json()
         User = datastore.Entity(key=storage.key('user'))
         tmp = {}
         for key, value in data.items():
-            setattr(tmp, key, value)
+            tmp[key] = value
         User.update(tmp.items())
         storage.put(User)
         return 'success'
