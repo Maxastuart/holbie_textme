@@ -76,6 +76,9 @@ def api_user():
             setattr(tmp, key, value)
         User.update(tmp.items())
         storage.put(User)
+        return 'success'
+    else:
+        return False
 
 def send_email_async(app, msg):
     with app.app_context():
