@@ -7,11 +7,15 @@ Holberton School Hack Day Project to use intranet's API &amp; receive an email o
 ### install python 3.7
 
 mac:
-```$ brew install python```
+
+```bash
+brew install python
+```
 
 linux (ubuntu):
 
-```$ sudo apt update
+```bash
+sudo apt update
 sudo apt install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
@@ -22,13 +26,16 @@ sudo apt install python3.7
 
 This, and the rest, should be done in the folder you cloned this repo into ( /foo/bar/holbie_textme )
 
-```$ python3.7 -m pip venv venv   # creates a venv folder in your current directory
+```bash
+python3.7 -m pip venv venv   # creates a venv folder in your current directory
 source venv/bin/activate        # activates this virtual environment
 ```
 
 ### install dependencies
 
-```$ python3.7 -m pip install -r requirements.txt```
+```bash
+python3.7 -m pip install -r requirements.txt
+```
 
 ### Get our secret environment variables from Slack
 
