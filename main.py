@@ -1,3 +1,4 @@
+#!./venv/bin/python3
 # Copyright 2018 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,13 +14,30 @@
 # limitations under the License.
 
 # [START gae_python37_render_template]
+
+# FLASK_APP=main.py MAIL_USERNAME=holbietextme@gmail.com MAIL_PASSWORD=ryuichiiscool python main.py
 import datetime
-from flask import Flask, render_template
-from flask_cors import CORS
+from flask import flash, Flask, render_template, redirect, request, url_for
+from flask_mail import Mail, Message
 from google.cloud import datastore
+from os import getenv
+from threading import Thread
 
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
+# app.config['DEBUG'] = True
+app.config['SECRET_KEY'] = 'hard to guess string'  # might not need
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
+app.config['MAIL_SENDER'] = getenv('MAIL_USERNAME')
+app.config['SSL_REDIRECT'] = False
+
+mail = Mail(app)
+
 storage = datastore.Client()
 
 def store_time(dt):
@@ -29,7 +47,6 @@ def store_time(dt):
     })
 
     storage.put(entity)
-
 
 def fetch_times(limit):
     query = storage.query(kind='visit')
@@ -49,9 +66,35 @@ def root():
 
     return render_template('index.html', times=times)
 
-@app.route('/api/user')
-def api(req):
+@app.route('/api/user', methods=['POST'])
+def api_user(data):
     pass
+    # data = []
+    # error = None
+    # select = request.form.get('comp_select')
+    # resp = query_api(select)
+    # pp(resp)
+    # if resp:
+    #     data.append(resp)
+    # if len(data) != 2:
+    #     error = 'Bad Response from Weather API'
+    # return request.Response() ('result.html', data=data, error=error)
+
+
+def send_email_async(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+
+def send_email(to, subject):  # , template, **kwargs):
+    msg = Message(subject, sender=app.config['MAIL_SENDER'], recipients=[to])
+    # render_template(template + '.txt', **kwargs)
+    msg.body = 'this is the body'
+    # render_template(template + '.html', **kwargs)
+    msg.html = '<h1>header html</h1>'
+    thr = Thread(target=send_email_async, args=[app, msg])
+    thr.start()
+    return thr
 
 
 if __name__ == '__main__':
