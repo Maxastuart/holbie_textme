@@ -43,10 +43,9 @@ body{
     border-color:#ff6666;
 }
 
-.box input[name="phone"]{
+.box input[name="phone"], .box input[name="nApi"], .box input[name="nSecret"]{
     display:none;
 }
-
 
 .box input[type = "submit"]{
     border:0;
@@ -76,7 +75,18 @@ body{
     transform: translate(-20%, -20%);
     transition: 0.25s;
 }
-
+#text_msg:checked ~ .myNapi{
+    display:block;
+    padding: 0;
+    transform: translate(-20%, -20%);
+    transition: 0.25s;
+}
+#text_msg:checked ~ .mySecret{
+    display:block;
+    padding: 0;
+    transform: translate(-20%, -20%);
+    transition: 0.25s;
+}
 .myDescription{
     display:none;
     /*padding-left:40%;*/
