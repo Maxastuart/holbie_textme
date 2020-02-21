@@ -18,26 +18,14 @@
 # FLASK_APP=main.py MAIL_USERNAME=holbietextme@gmail.com MAIL_PASSWORD=ryuichiiscool python main.py
 import datetime
 from flask import flash, Flask, render_template, redirect, request, url_for
-from flask_cors import CORS
-from google.cloud import datastore
 from flask_mail import Mail, Message
-
+from google.cloud import datastore
 from os import getenv
 from threading import Thread
 
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-storage = datastore.Client()
-
-def store_time(dt):
-    entity = datastore.Entity(key=storage.key('visit'))
-    entity.update({
-        'timestamp': dt
-    })
-
-    storage.put(entity)
-
 # app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'hard to guess string'  # might not need
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -49,6 +37,16 @@ app.config['MAIL_SENDER'] = getenv('MAIL_USERNAME')
 app.config['SSL_REDIRECT'] = False
 
 mail = Mail(app)
+
+storage = datastore.Client()
+
+def store_time(dt):
+    entity = datastore.Entity(key=storage.key('visit'))
+    entity.update({
+        'timestamp': dt
+    })
+
+    storage.put(entity)
 
 def fetch_times(limit):
     query = storage.query(kind='visit')
